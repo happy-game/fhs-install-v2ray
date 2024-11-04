@@ -2,16 +2,16 @@
 # shellcheck disable=SC2268
 
 # The files installed by the script conform to the Filesystem Hierarchy Standard:
-# https://wiki.linuxfoundation.org/lsb/fhs
+# https://py.happydrink.beer/https://wiki.linuxfoundation.org/lsb/fhs
 
 # The URL of the script project is:
-# https://github.com/v2fly/fhs-install-v2ray
+# https://py.happydrink.beer/https://github.com/v2fly/fhs-install-v2ray
 
 # The URL of the script is:
-# https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+# https://py.happydrink.beer/https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
 
 # If the script executes incorrectly, go to:
-# https://github.com/v2fly/fhs-install-v2ray/issues
+# https://py.happydrink.beer/https://github.com/v2fly/fhs-install-v2ray/issues
 
 # You can set this variable whatever you want in shell session right before running this script by issuing:
 # export DAT_PATH='/usr/local/share/v2ray'
@@ -117,7 +117,7 @@ identify_the_operating_system_and_architecture() {
     fi
     # Do not combine this judgment condition with the following judgment condition.
     ## Be aware of Linux distribution like Gentoo, which kernel supports switch between Systemd and OpenRC.
-    ### Refer: https://github.com/v2fly/fhs-install-v2ray/issues/84#issuecomment-688574989
+    ### Refer: https://py.happydrink.beer/https://github.com/v2fly/fhs-install-v2ray/issues/84#issuecomment-688574989
     if [[ -f /.dockerenv ]] || grep -q 'docker\|lxc' /proc/1/cgroup && [[ "$(type -P systemctl)" ]]; then
       true
     elif [[ -d /run/systemd/system ]] || grep -q systemd <(ls -l /sbin/init); then
@@ -243,7 +243,7 @@ get_version() {
   fi
   # Get V2Ray release version number
   TMP_FILE="$(mktemp)"
-  if ! curl -x "${PROXY}" -sS -i -H "Accept: application/vnd.github.v3+json" -o "$TMP_FILE" 'https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
+  if ! curl -x "${PROXY}" -sS -i -H "Accept: application/vnd.github.v3+json" -o "$TMP_FILE" 'https://py.happydrink.beer/https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
     "rm" "$TMP_FILE"
     echo 'error: Failed to get release list, please check your network.'
     exit 1
@@ -291,7 +291,7 @@ get_version() {
 }
 
 download_v2ray() {
-  DOWNLOAD_LINK="https://github.com/v2fly/v2ray-core/releases/download/$RELEASE_VERSION/v2ray-linux-$MACHINE.zip"
+  DOWNLOAD_LINK="https://py.happydrink.beer/https://github.com/v2fly/v2ray-core/releases/download/$RELEASE_VERSION/v2ray-linux-$MACHINE.zip"
   echo "Downloading V2Ray archive: $DOWNLOAD_LINK"
   if ! curl -x "${PROXY}" -R -H 'Cache-Control: no-cache' -o "$ZIP_FILE" "$DOWNLOAD_LINK"; then
     echo 'error: Download failed! Please check your network or try again.'
@@ -399,7 +399,7 @@ install_startup_service_file() {
     "rm" -f '/etc/systemd/system/v2ray.service.d/10-donot_touch_single_conf.conf' \
       '/etc/systemd/system/v2ray@.service.d/10-donot_touch_single_conf.conf'
     echo "# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
-# Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+# Or all changes you made will be lost!  # Refer: https://py.happydrink.beer/https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
 ExecStart=
 ExecStart=${START_COMMAND} -confdir $JSONS_PATH" |
@@ -408,12 +408,12 @@ ExecStart=${START_COMMAND} -confdir $JSONS_PATH" |
     "rm" -f '/etc/systemd/system/v2ray.service.d/10-donot_touch_multi_conf.conf' \
       '/etc/systemd/system/v2ray@.service.d/10-donot_touch_multi_conf.conf'
     echo "# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
-# Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+# Or all changes you made will be lost!  # Refer: https://py.happydrink.beer/https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
 ExecStart=
 ExecStart=${START_COMMAND} -config ${JSON_PATH}/config.json" > '/etc/systemd/system/v2ray.service.d/10-donot_touch_single_conf.conf'
     echo "# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
-# Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+# Or all changes you made will be lost!  # Refer: https://py.happydrink.beer/https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
 ExecStart=
 ExecStart=${START_COMMAND} -config ${JSON_PATH}/%i.json" > '/etc/systemd/system/v2ray@.service.d/10-donot_touch_single_conf.conf'
